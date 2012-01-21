@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2010-02-21
+  buyin_cost: 1
+  rebuy_cost: 1
+  addon_cost: 1
+
+two:
+  date: 2010-02-21
+  buyin_cost: 1
+  rebuy_cost: 1
+  addon_cost: 1

@@ -1,0 +1,48 @@
+<h1>Listing players</h1>
+
+<table>
+  <tr>
+	<th>#</th>
+    <th><%= link_to 'Name', players_path + "?sort=name"%></th>
+	<th><%= link_to 'Tournaments<br/>played', players_path + "?sort=tournaments" %></th>
+	<th><%= link_to 'Rebuys', players_path+"?sort=rebuys"%></th>
+	<th><%= link_to 'Net Result', players_path+"?sort=net"%></th>
+	<th><%= link_to 'Net /<br/>Tourn.', players_path + "?sort=netpt" %></th>
+	<th><%= link_to 'Score', players_path + "?sort=score" %>*</th>
+	<th><%= link_to 'Score /<br/>Tourn.', players_path + "?sort=scorept" %></th>
+  </tr>
+<% i = 0 %>
+<% @players.each do |player| %>
+  <% i = i + 1 %>
+  <tr>
+	<td><%= i%></td>
+    <td><%= link_to player.name, player %></td>
+	<td class="righttext"><%=h player.participations.size %></td>
+	<td class="righttext"><%=h player.rebuys %></td>
+	<td class="righttext"><%=h player.net_result %></td>
+	<td class="righttext"><% if player.participations.size > 0 %> <%=h sprintf("%.2f", (player.net_result / player.participations.size)) %> <% end %> 
+	<td class="righttext"><%=h sprintf("%.4f",player.score) %></td>
+	<td class="righttext"><%=h sprintf("%.4f" ,player.rel_score) %></td>
+
+    <td><%= link_to 'Show', player %></td>
+
+	<% if has_role('ADMIN') %>
+    <td><%= link_to 'Edit', edit_player_path(player) %></td>
+    <td><%= link_to 'Destroy', player, :confirm => 'Are you sure?', :method => :delete %></td>	
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br/>
+<%= link_to 'Tournaments list', tournaments_path %>
+<br />
+
+<% if has_role('ADMIN') %>
+<%= link_to 'New player', new_player_path %>
+<% end 	%>
+<br/>
+* Score: Score of a tournament is calculated by: (((np - p) / (np-1)) * 2) -1 - ((2 * nr / (np-1)) * 2)
+<br/>np: Number of players
+<br/>p: Placement
+<br/>nr: Number or rebuys

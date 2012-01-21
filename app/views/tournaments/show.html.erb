@@ -1,0 +1,48 @@
+<p>
+  <b>Date:</b>
+  <%=h @tournament.date %>
+</p>
+
+<p>
+  <b>Buyin cost:</b>
+  <%=h @tournament.buyin_cost %>
+</p>
+
+<p>
+  <b>Rebuy cost:</b>
+  <%=h @tournament.rebuy_cost %>
+</p>
+
+<p>
+  <b>Addon cost:</b>
+  <%=h @tournament.addon_cost %>
+</p>
+
+Participants (<%= @tournament.participations.size %>)<br/>
+<table>
+	<tr>
+		<th>Player</th>		<th>Position</th>		<th>Rebuys</th>		<th>Addons</th> 		<th>Pricemoney</th>		<th>Net Result</th> <th>Score *</th>
+	</tr>
+	<% @tournament.participants_by_rank.each do |p| %>
+	<tr>
+		
+		<td><%= link_to p.player.name, p.player%></td>
+		<td class="righttext"><%= p.placement %></td>
+		<td class="righttext"><%= p.number_of_rebuys %></td>
+		<td class="righttext"><%= p.number_of_addons %></td>
+		<td class="righttext"><%= p.money_won %></td>
+		<td class="righttext"><%= p.net_worth %>
+		<td class="righttext"><%= sprintf('%.3f', p.score) %>
+	</tr>
+	<% end %>
+</table>
+<% if has_role('ADMIN') %>
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
+<% end %>
+<%= link_to 'Tournaments list', tournaments_path %>
+
+<br/><br/>
+* Score: Score of a tournament is calculated by: (((np - p) / (np-1)) * 2) -1 - ((2 * nr / (np-1)) * 2)
+<br/>np: Number of players
+<br/>p: Placement
+<br/>nr: Number or rebuys

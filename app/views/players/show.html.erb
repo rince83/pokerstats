@@ -1,0 +1,42 @@
+<p>
+  <b>Name:</b>
+  <%=h @player.name %>
+</p>
+
+Tournaments (<%= @player.participations.size %>)
+<table>
+	<tr>
+		<th>Date</th>	<th># of<br/>Players</th>	<th>Position</th>		<th>Rebuys</th>		<th>Addons</th> 		<th>Pricemoney<br/>won</th>		<th>Net<br/>Result</th> <th>Score *</th>
+	</tr>
+	<% @player.participations.each do |p| %>
+	<tr>
+		
+		<td><%= link_to p.tournament.date, p.tournament %></td>
+		<td class="righttext"><%= p.tournament.participations.size %></td>
+		<td class="righttext"><%= p.placement %></td>
+		<td class="righttext"><%= p.number_of_rebuys %></td>
+		<td class="righttext"><%= p.number_of_addons %></td>
+		<td class="righttext"><%= p.money_won %></td>
+		<td class="righttext"><%= p.net_worth %></td>
+		<td class="righttext"><%= sprintf('%.3f', p.score) %></td>
+	</tr>
+	<% end %>
+</table>
+<br/>
+<h3>Net Result</h3>
+<img src="<%= @player.timeline  %>"/>
+<br/>
+<h3>Score</h3>
+<img src="<%= @player.timeline_score  %>"/>
+<br/>
+
+
+<% if has_role('ADMIN') %>
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<% end %>
+<%= link_to 'Players list', players_path %>
+<br/><br/>
+* Score: Score of a tournament is calculated by: (((np - p) / (np-1)) * 2) -1 - ((2 * nr / (np-1)) * 2)
+<br/>np: Number of players
+<br/>p: Placement
+<br/>nr: Number or rebuys

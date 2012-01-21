@@ -1,0 +1,32 @@
+<h1>Listing tournaments</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Buyin cost</th>
+    <th>Rebuy cost</th>
+    <th>Addon cost</th>
+  </tr>
+
+
+<% @tournaments.each do |tournament| %>
+  <tr>
+    <td><%= link_to (h tournament.date), tournament %></td>
+    <td class="righttext"><%=h tournament.buyin_cost %></td>
+    <td class="righttext"><%=h tournament.rebuy_cost %></td>
+    <td class="righttext"><%=h tournament.addon_cost %></td>
+    <td><%= link_to 'Show', tournament %></td>
+	<% if has_role('ADMIN') %>
+    <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
+    <td><%= link_to 'Destroy', tournament, :confirm => 'Are you sure?', :method => :delete %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+<br />
+<% if has_role('ADMIN') %>
+<%= link_to 'New tournament', new_tournament_path %>
+<% end %>
+
+<br />
+<%= link_to 'Players list', players_path %>

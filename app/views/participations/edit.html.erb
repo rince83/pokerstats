@@ -1,0 +1,12 @@
+<h1>Editing participation</h1>
+
+<% form_for(@participation) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @participation %> |
+<%= link_to 'Back', participations_path %>

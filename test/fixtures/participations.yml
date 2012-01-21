@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tournament: 
+  player: 
+  placement: 1
+  number_of_rebuys: 1
+  number_of_addons: 1
+  money_won: 9.99
+
+two:
+  tournament: 
+  player: 
+  placement: 1
+  number_of_rebuys: 1
+  number_of_addons: 1
+  money_won: 9.99

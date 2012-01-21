@@ -1,0 +1,20 @@
+  <tr class="participant">
+	<th>
+	<%= form.collection_select( :player_id, @players, :id, :name ) %>
+    </th>
+	<th>
+	<%= form.text_field :placement, :size => 15 %>
+	</th>
+	<th>
+    <%= form.text_field :number_of_rebuys, :size => 15 %>
+    </th>
+	<th>
+	<%= form.text_field :number_of_addons, :size => 15 %>
+    </th>
+	<th>
+	<%= form.text_field :money_won, :size => 15 %>
+  	</th>
+	<th>
+	<%= remove_participant_link( form ) %>
+	</th>
+  </tr>
